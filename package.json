@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/LonnyGomes/csv2gh/issues"
   },
-  "homepage": "https://github.com/LonnyGomes/csv2gh#readme"
+  "homepage": "https://github.com/LonnyGomes/csv2gh#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
