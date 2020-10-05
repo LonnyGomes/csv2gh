@@ -1,0 +1,24 @@
+{
+  "name": "csv2gh",
+  "version": "0.0.1",
+  "description": "Imports CSV data into GitHub",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LonnyGomes/csv2gh.git"
+  },
+  "keywords": [
+    "csv",
+    "tsv",
+    "github"
+  ],
+  "author": "Lonny Gomes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LonnyGomes/csv2gh/issues"
+  },
+  "homepage": "https://github.com/LonnyGomes/csv2gh#readme"
+}
