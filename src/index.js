@@ -1,9 +1,11 @@
 require('dotenv').config();
 
-const { Octokit } = require('@octokit/rest');
-const Parser = require('./parse');
-const octokit = new Octokit();
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_OWNER = process.env.GITHUB_OWNER;
+const GITHUB_REPO = process.env.GITHUB_REPO;
 
+const GitHub = require('./github');
+const Parser = require('./parse');
 const parser = new Parser('MOCK_DATA.csv');
 
 const genTitle = (data) => {
@@ -47,13 +49,22 @@ const init = async () => {
         console.error(`Error encountered while parsing: ${error.message}`);
     }
 
-    results.forEach((item) => {
+    const github = new GitHub(GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO);
+    github.init();
+
+    for (const item of results) {
         const title = genTitle(item);
         const body = genBody(item);
         const labels = genLabels(item);
 
-        console.log(title, body, labels);
-    });
+        console.log(`Adding ${title}`);
+
+        try {
+            await github.createIssue(title, body, labels);
+        } catch (error) {
+            console.error(`Error while creating issue: ${error.message}`);
+        }
+    }
 };
 
 init();
