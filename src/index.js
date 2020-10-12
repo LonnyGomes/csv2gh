@@ -3,10 +3,11 @@ require('dotenv').config();
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_OWNER = process.env.GITHUB_OWNER;
 const GITHUB_REPO = process.env.GITHUB_REPO;
+const CSV_FILE = process.env.CSV_FILE;
 
 const GitHub = require('./github');
 const Parser = require('./parse');
-const parser = new Parser('MOCK_DATA.csv');
+const parser = new Parser(CSV_FILE);
 
 const genTitle = (data) => {
     const { req_id, title } = data;
