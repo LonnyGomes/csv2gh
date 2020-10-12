@@ -13,11 +13,26 @@ module.exports = class Parser {
 
             fs.createReadStream(this.filename)
                 .pipe(csv())
-                .on('data', (data) => results.push(data))
+                .on('data', (data) => {
+                    data.type = this.processType(data.type);
+                    results.push(data);
+                })
                 .on('error', (err) => reject(err))
                 .on('end', () => {
                     resolve(results);
                 });
         });
+    }
+
+    processType(str) {
+        if (!str) {
+            return [];
+        }
+
+        if (str.indexOf('|') > -1) {
+            return str.split('|');
+        } else {
+            return [str];
+        }
     }
 };
